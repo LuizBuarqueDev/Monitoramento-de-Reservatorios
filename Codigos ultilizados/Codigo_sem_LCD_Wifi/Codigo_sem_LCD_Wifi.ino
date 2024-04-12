@@ -13,14 +13,17 @@ float distancia = 0;
 const float distanciaMax = 330;
 const float distanciaMin = 15;
 
-//LiquidCrystal lcd(7, 6, 5, 4, 3, 2); 
+//LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 
 void setup() {
-//  lcd.begin(16, 2);
+  //  lcd.begin(16, 2);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.begin(9600);
-  
+  verificarConexao();
+}
+
+void verificarConexao() {
   WiFi.begin(rede, senha);
   while (WiFi.status() != WL_CONNECTED) //Aguarda a conexao
   {
@@ -41,30 +44,30 @@ void sensorRun() {
 
 float calcularDistancia() {
   /* Essa função é responsavel por fazer o calculo da
-  distancia ou da quantidade de litros do reservatorio*/
+    distancia ou da quantidade de litros do reservatorio*/
   return (pulseIn(echoPin, HIGH) * 0.034 / 2);
 }
 
 void lcdRun() {
   /*Essa função é responsavel pela exibição dos calculos
-   presentes presentes no metodo calcularDistancia()*/
+    presentes presentes no metodo calcularDistancia()*/
   /*lcd.clear();
-  lcd.setCursor(6, 0);
-  if ((distancia <= distanciaMax) && (distancia >= distanciaMin)) {
+    lcd.setCursor(6, 0);
+    if ((distancia <= distanciaMax) && (distancia >= distanciaMin)) {
     lcd.print((String)distancia + "cm");
-  } else {
+    } else {
     lcd.print("*******");
-  }*/
+    }*/
 }
 
 void mapearLcd() {
-  /*Essa função é responsavel pela exibição da barra 
-  presente no LCD*/
+  /*Essa função é responsavel pela exibição da barra
+    presente no LCD*/
   /*lcd.setCursor(0, 1);
-  for (int ln = 0; ln < map(distancia, distanciaMin, distanciaMax, 16, 0);ln++) lcd.print(char(255));
-  {
+    for (int ln = 0; ln < map(distancia, distanciaMin, distanciaMax, 16, 0);ln++) lcd.print(char(255));
+    {
     delay(20);
-  }*/
+    }*/
 }
 
 void loop() {
