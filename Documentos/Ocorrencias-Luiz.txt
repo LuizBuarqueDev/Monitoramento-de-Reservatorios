@@ -1,0 +1,24 @@
+Relatórios de ocorrência Monitoramento de reservatórios 
+
+1.	02 de abril de 2024
+Nossa equipe recebeu o kit com Arduino ESP8266 mais o restante dos materiais necessários para o projeto
+2.	09 de abril de 2024
+Nossa equipe criou o primeiro código que tenha como funcional, esse código oferecia o suporte necessário para o funcionamento correto do sensor ultrassónico e display LCD presentes no simulador TINKERCAD.
+3.	 10 de abril de 2024
+Os integrantes do grupo Cristiane Silva Luiz Gabriel, Makissuel Melquiades, Vitor Dias foram durante o período da tarde ao IF para o primeiro encontro presencial do grupo. Apesar dos esforços o código feito dia 09 de abril não funcionou, pois a placa ESP8266 apresentava defeitos. Ao final da tarde o professor Adriano fez a substituição do equipamento.
+4.	12 de abril de 2024
+Durante a reunião semana com o professor nos foi apresentado o mapeamento dos pinos da placa. Na mesma noite o Aluno Luiz Gabriel implementou um novo código a o Arduino , esse código imprimia na tela a distância calculada usando o sensor ultrassónico e se conectava a rede Wi-fi.  
+5.	14 de abril de 2024
+A aluna Ana Gabriela fez a montagem do display LCD.
+6.	
+7.	
+8.	
+9.	
+10.	
+11.	
+12.	
+13.	
+14.	
+15.	
+16.	
+
