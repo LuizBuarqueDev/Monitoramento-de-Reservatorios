@@ -7,7 +7,7 @@
 #define echoPin 16
 
 const char *rede = "LINKNET_JANETE _2.4G";
-const char *senha = "jkgl0812";
+const char *senha = "Senha aqui";
 
 float distancia = 0;
 const float distanciaMax = 330;
