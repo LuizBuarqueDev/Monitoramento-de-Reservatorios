@@ -1,7 +1,7 @@
 // C++ code
 //
 #include <ESP8266WiFi.h>
-//#include <LiquidCrystal.h>
+#include <LiquidCrystal.h>
 
 #define trigPin 1
 #define echoPin 16
@@ -10,10 +10,10 @@ const char *rede = "LINKNET_JANETE _2.4G";
 const char *senha = "jkgl0812";
 
 float distancia = 0;
-const float distanciaMax = 330;
-const float distanciaMin = 15;
+const float distanciaMax = 6000;
+const float distanciaMin = 20;
 
-//LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+LiquidCrystal lcd(14, 12, 13, 15, 2, 0);
 
 void setup() {
   //  lcd.begin(16, 2);
@@ -51,19 +51,19 @@ float calcularDistancia() {
 void lcdRun() {
   /*Essa função é responsavel pela exibição dos calculos
     presentes presentes no metodo calcularDistancia()*/
-  /*lcd.clear();
+  lcd.clear();
     lcd.setCursor(6, 0);
     if ((distancia <= distanciaMax) && (distancia >= distanciaMin)) {
     lcd.print((String)distancia + "cm");
     } else {
     lcd.print("*******");
-    }*/
+    }
 }
 
 void mapearLcd() {
   /*Essa função é responsavel pela exibição da barra
     presente no LCD*/
-  /*lcd.setCursor(0, 1);
+    /*lcd.setCursor(0, 1);
     for (int ln = 0; ln < map(distancia, distanciaMin, distanciaMax, 16, 0);ln++) lcd.print(char(255));
     {
     delay(20);
@@ -73,8 +73,8 @@ void mapearLcd() {
 void loop() {
   sensorRun();
   distancia = calcularDistancia();
-  delay(500);
-  //lcdRun();
+  delay(800);
+  lcdRun();
   //mapearLcd();
   Serial.println(String(distancia) + "cm");
 }
