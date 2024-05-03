@@ -7,7 +7,8 @@
 #define echoPin 16
 
 // Definição dos parâmetros do ThingSpeak
-
+#define CHANNEL_ID
+#define CHANNEL_API_KEY
 
 // Definição dos parâmetros do WiFi
 const char *rede = "Prof Jessiva Sabino";
@@ -99,5 +100,6 @@ void lcdRun() {
 
 void enviarDados(String strDistancia) {
   // Envio dos dados para o ThingSpeak
+  
   delay(60000);
 }
