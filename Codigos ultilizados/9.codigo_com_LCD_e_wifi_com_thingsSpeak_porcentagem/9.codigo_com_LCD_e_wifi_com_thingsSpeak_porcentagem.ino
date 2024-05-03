@@ -19,7 +19,7 @@ WiFiClient wifiClient;
 int distancia = 0;
 int porcentagem = 0;
 
-int reservatorioFull = 32;
+int reservatorioFull = 35;
 int reservatorioEmpty = 63;
 
 String strPorcentagem = String(porcentagem);
@@ -50,14 +50,14 @@ void loop() {
 
   porcentagem = calcularPorcentagem();
   strPorcentagem = String(porcentagem);
-  
+
   lcdRun();
   Serial.println(strDistancia + "cm");
-  validarDados(distancia); 
+  validarDados(distancia);
 }
-void validarDados(int distancia){
-  if(distancia != 0){
-    enviarDados(strDistancia);
+void validarDados(int distancia) {
+  if (distancia != 0) {
+    enviarDados(strDistancia, strPorcentagem);
   }
 }
 
@@ -73,7 +73,7 @@ void fazerConexaoWifi() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Conectando......");
-  
+
   WiFi.begin(rede, senha);
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print("Conectando a ");
@@ -98,9 +98,20 @@ void sensorRun() {
   digitalWrite(trigPin, LOW);
 }
 
-int calcularPorcentagem(){
-  return ((distancia - reservatorioFull) * 100) / (reservatorioEmpty - reservatorioFull);
+int calcularPorcentagem() {
+  int distanciaRestante = distancia - reservatorioFull;
+  int distanciaTotal = reservatorioEmpty - reservatorioFull;
 
+  if (distanciaRestante < 0) {
+    // O reservatório está completamente cheio
+    return 100;
+  } else if (distanciaRestante >= distanciaTotal) {
+    // O reservatório está completamente vazio
+    return 0;
+  } else {
+    // Calcula a porcentagem com base na distância restante
+    return 100 - ((distanciaRestante * 100) / distanciaTotal);
+  }
 }
 
 int calcularDistancia() {
@@ -115,14 +126,15 @@ void lcdRun() {
   lcd.print(distancia);
   lcd.print("cm");
 
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
   lcd.print(porcentagem);
   lcd.print("%");
 }
 
-void enviarDados(String strDistancia) {
+void enviarDados(String strDistancia, String strPorcentagem) {
   // Envio dos dados para o ThingSpeak
-  ThingSpeak.writeField(CHANNEL_ID, 1, strDistancia, CHANNEL_API_KEY);
-  ThingSpeak.writeField(CHANNEL_ID, 2, strPorcentagem, CHANNEL_API_KEY);
+  ThingSpeak.setField(1, strDistancia);
+  ThingSpeak.setField(2, strPorcentagem);
+  ThingSpeak.writeFields(CHANNEL_ID, CHANNEL_API_KEY);
   delay(60000);
 }
